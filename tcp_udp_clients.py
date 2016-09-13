@@ -13,8 +13,6 @@ def tcp_client(target_host, target_port, path="/"):
     response = client_socket.recv(4096)
 
     print(response)
-    client_socket.close()
-
 
 def udp_client(target_host, target_port, payload, path="/",):
     # user datagram protocol
@@ -23,6 +21,6 @@ def udp_client(target_host, target_port, payload, path="/",):
 
     client.sendto(payload, (target_host, target_port))
 
-    data, addr = client.recvfrom(4096)
+    data, addr = client.recvfrom(9096)
     client.close()
     print(data)
