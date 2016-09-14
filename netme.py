@@ -86,14 +86,12 @@ def server_loop():
 
 
 def run_command(command):
-
     # trim the newline
     command = command.rstrip()
 
     # run the command and get the output back
     try:
-        output = subprocess.check_output(
-            command, stderr=subprocess.STDOUT, shell=True)
+        output = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
     except:
         output = "Failed to execute command\r\n"
 
@@ -142,12 +140,13 @@ def client_handler(client_socket):
 
             cmd_buffer = ""
             while "\n" not in cmd_buffer:
-            	cmd_buffer += client_socket.recv(1024)
+                cmd_buffer += client_socket.recv(1024)
             # now we receive until we see a linefeed (enter key)
             response = run_command(cmd_buffer)
 
             # send the response back
             client_socket.send(response)
+
 
 def main():
     global listen
@@ -163,7 +162,7 @@ def main():
     # read command line arguments
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hle:t:p:cu:", [
-                                   "help, listen", "execute", "target", "port", "command", "upload"])
+            "help, listen", "execute", "target", "port", "command", "upload"])
     except getopt.GetoptError as err:
         print str(err)
         usage()
@@ -188,7 +187,6 @@ def main():
 
     # listen or send data from the stdin?
     if not listen and len(target) and port > 0:
-
         # read in the buffer from the command line
         # this will block, so send CTRL-D if not sending the input
         # to stdin
